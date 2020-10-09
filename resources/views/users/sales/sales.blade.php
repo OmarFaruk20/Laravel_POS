@@ -16,43 +16,63 @@
                         <th>Chhalan No</th>
                         <th>Customer</th>
                         <th>Data</th>
+                        <th>Quantity</th>
                         <th>Total</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                    <th>Chhalan No</th>
-                    <th>Customer</th>
-                    <th>Data</th>
-                    <th>Total</th>
-                    <th class="text-center">Action</th>
-                    </tr>
-                </tfoot>
                 <tbody>
+                    @php
+                        $TotalItem = 0;
+                        $grandTotal = 0;
+                    @endphp
+
                     @foreach ($user->sales as $sale)
                     <tr>
                     <td>{{ $sale->challan_no }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $sale->date }}</td>
-                    <td>100</td>
+                    <td>
+                        @php
+                            $itemQty = $sale->items()->sum('quantity');
+                            $TotalItem += $itemQty;
+                            echo $itemQty;
+                        @endphp
+                    </td>
+                    <td>
+                        @php
+                            $total = $sale->items()->sum('total');
+                            $grandTotal += $total;
+                            echo $total;
+                        @endphp
+                    </td>
                     <td class="text-center">
-                        <form method="POST" action=" {{ route('users.destroy', ['user' => $sale->id]) }} ">
-                            <a class="btn btn-primary btn-sm" href="{{ route('users.show', ['user' => $sale->id]) }}">
+                        <form method="POST" action="{{ route('users.sales.destroy', ['id' => $user->id, 'invoice_id' => $sale->id]) }}">
+                            <a class="btn btn-primary btn-sm" href="{{ route('users.sales.invoice_details', ['id' => $user->id, 'invoice_id' => $sale->id]) }}">
                                 <i class="fa fa-eye"></i>
                             </a>
+                            @if($itemQty == 0)
                             @csrf
                             @method('DELETE')
                             <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i>
                             </button>
+                            @endif
                         </form>
-                        {{-- <a href="{{url('users').'/'.$item->id}}" class="btn btn-outline-info"><i class="fa fa-edit"></i>Edit</a>
-                        <a onclick="return confirm('Are you sure?')" href="{{url('user/delete').'/'.$item->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i>Delete</a> --}}
                     </td>
                     </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Chhalan No</th>
+                        <th>Customer</th>
+                        <th>Data</th>
+                        <th>{{ $TotalItem }}</th>
+                        <th>{{ $grandTotal }}</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </tfoot>
                 </table>
             </div>
             </div>

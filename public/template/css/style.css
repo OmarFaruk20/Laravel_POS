@@ -1,3 +1,15 @@
 .page_header{
     margin-bottom:20px;
 }
+
+.no_padding{
+    padding:0px !important;
+}
+
+.no_margin{
+    padding:0px !important;
+}
+
+.invoice_items{
+    margin: 38px 5px 28px 5px;
+}

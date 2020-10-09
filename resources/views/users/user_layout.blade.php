@@ -35,11 +35,11 @@
     <div class="row clearfix mt-5">
         <div class="col-md-2">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link @if($tab_manu == 'user_info') active @endif" href="{{ route('users.show', $user->id) }}">User Info</a>
-                <a class="nav-link @if($tab_manu == 'sales') active @endif" href="{{ route('users.sales', $user->id) }}">Sales</a>
-                <a class="nav-link @if($tab_manu == 'purchases') active @endif" href="{{ route('users.purchases', $user->id) }}">Purchase</a>
-                <a class="nav-link @if($tab_manu == 'payments') active @endif" href="{{ route('users.payments', $user->id) }}">Payment</a>
-                <a class="nav-link @if($tab_manu == 'receipts') active @endif" href="{{ route('users.receipts', $user->id) }}">Receipt</a>
+                <a class="nav-link @if($tab_manu  == 'user_info') active @endif" href="{{ route('users.show', $user->id) }}">User Info</a>
+                <a class="nav-link @if($tab_manu  == 'sales') active @endif" href="{{ route('users.sales', $user->id) }}">Sales</a>
+                <a class="nav-link @if($tab_manu  == 'purchases') active @endif" href="{{ route('users.purchases', $user->id) }}">Purchase</a>
+                <a class="nav-link @if($tab_manu  == 'payments') active @endif" href="{{ route('users.payments', $user->id) }}">Payment</a>
+                <a class="nav-link @if($tab_manu  == 'receipts') active @endif" href="{{ route('users.receipts', $user->id) }}">Receipt</a>
             </div>
         </div>
 
@@ -52,10 +52,10 @@
 <!-- Sales Modal -->
  <div class="modal fade" id="newSales" tabindex="-1" role="dialog" aria-labelledby="newSalesModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        {!! Form::open(['route' => ['users.payments.store', $user->id], 'method' => 'POST']) !!}
+        {!! Form::open(['route' => ['users.sales.store', $user->id], 'method' => 'POST']) !!}
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="newSalesModalLabel">Add New Sales</h5>
+          <h5 class="modal-title" id="newSalesModalLabel">New Sale Invoice</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -69,9 +69,9 @@
             </div>
 
             <div class="form-group row">
-                <label for="inputAmount" class="col-sm-2 col-form-label">Amount<span class="text-danger">*</span></label>
+                <label for="inputChallan_no" class="col-sm-2 col-form-label">Challan No</label>
                 <div class="col-sm-10">
-                {{ Form::text('amount', Null, ['class'=>'form-control', 'id'=>'inputAmount', 'placeholder'=>'Amount', 'required']) }}
+                {{ Form::text('challan_no', Null, ['class'=>'form-control', 'id'=>'inputChallan_no', 'placeholder'=>'Challan No']) }}
                 </div>
             </div>
 

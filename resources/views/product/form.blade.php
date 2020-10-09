@@ -75,7 +75,7 @@
                         </div>
 
 
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                     {!! Form::close() !!}
                     {{-- </form> --}}
                 </div>
